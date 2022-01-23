@@ -24,7 +24,7 @@ public class ReviewController {
 		
 		reviewService.reviewList(mav);
 		
-		return null;
+		return mav;
 		//return new ModelAndView("community/ReviewList");
 	}
 	

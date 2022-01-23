@@ -1,5 +1,6 @@
 package com.java.review.service;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.java.aop.LogAspect;
 import com.java.review.dao.ReviewDao;
+import com.java.review.dto.ReviewDto;
 
 @Component
 public class ReviewServiceImp implements ReviewService {
@@ -34,5 +36,17 @@ public class ReviewServiceImp implements ReviewService {
 		int count=reviewDao.getCount();
 		LogAspect.logger.info(LogAspect.LogMsg+count);
 		
+		List<ReviewDto> reviewList=null;
+		if(count > 0) {
+			reviewList=reviewDao.reviewList(startRow, endRow);
+			LogAspect.logger.info(LogAspect.LogMsg+reviewList.size());	
+		}
+		
+		mav.addObject("boardSize", boardSize);
+		mav.addObject("currentPage",currentPage);
+		mav.addObject("ReviewList", reviewList);
+		mav.addObject("count", count);
+		
+		mav.setViewName("community/ReviewList");
 	}
 }
