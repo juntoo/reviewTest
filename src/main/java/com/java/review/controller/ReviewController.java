@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.java.review.dto.ReviewDto;
 import com.java.review.service.ReviewService;
 
 @Controller
@@ -29,17 +30,36 @@ public class ReviewController {
 	}
 	
 	@RequestMapping(value="/community/ReviewRead.do", method = RequestMethod.GET)
-	public ModelAndView aboutjejuLocation(HttpServletRequest request,HttpServletResponse response) {
+	public ModelAndView reviewRead(HttpServletRequest request,HttpServletResponse response) {
 		return new ModelAndView("community/ReviewRead");
 	}
 	
 	@RequestMapping(value="/community/ReviewUpdate.do", method = RequestMethod.GET)
-	public ModelAndView aboutjejuSpeciality(HttpServletRequest request,HttpServletResponse response) {
+	public ModelAndView reviewUpdate(HttpServletRequest request,HttpServletResponse response) {
 		return new ModelAndView("community/ReviewUpdate");
 	}
 	
 	@RequestMapping(value="/community/ReviewWrite.do", method = RequestMethod.GET)
-	public ModelAndView aboutjejuactivities(HttpServletRequest request,HttpServletResponse response) {
-		return new ModelAndView("community/ReviewWrite");
+	public ModelAndView reviewWrite(HttpServletRequest request,HttpServletResponse response) {
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("request",request);
+		
+		reviewService.reviewWrite(mav);
+		
+		return mav;
+		//return mav;
+	}
+	
+	@RequestMapping(value="/community/ReviewWriteOk.do", method = RequestMethod.POST)
+	public ModelAndView reviewWriteOk(HttpServletRequest request,HttpServletResponse response, ReviewDto reviewDto) {
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("request",request);
+		mav.addObject("reviewDto",reviewDto);
+		
+		reviewService.reviewWriteOk(mav);
+		
+		return null;
 	}
 }

@@ -12,6 +12,10 @@ public class ReviewDto {
 	private int RVcount;	//조회수
 	private Date RVdate;	//작성일
 	
+	private String RVfilename;
+	private String RVfilepath;
+	private long RVfilesize;
+	
 	public int getRVnumber() {
 		return RVnumber;
 	}
@@ -53,11 +57,31 @@ public class ReviewDto {
 	}
 	public void setRVdate(Date rVdate) {
 		RVdate = rVdate;
-		
+	}
+	public String getRVfilename() {
+		return RVfilename;
+	}
+	public void setRVfilename(String rVfilename) {
+		RVfilename = rVfilename;
+	}
+	public String getRVfilepath() {
+		return RVfilepath;
+	}
+	public void setRVfilepath(String rVfilepath) {
+		RVfilepath = rVfilepath;
+	}
+	public long getRVfilesize() {
+		return RVfilesize;
+	}
+	public void setRVfilesize(long rVfilesize) {
+		RVfilesize = rVfilesize;
 	}
 	@Override
 	public String toString() {
 		return "ReviewDto [RVnumber=" + RVnumber + ", RTnumber=" + RTnumber + ", Mid=" + Mid + ", RVtitle=" + RVtitle
-				+ ", RVcontent=" + RVcontent + ", RVcount=" + RVcount + ", RVdate=" + RVdate + "]";
+				+ ", RVcontent=" + RVcontent + ", RVcount=" + RVcount + ", RVdate=" + RVdate + ", RVfilename="
+				+ RVfilename + ", RVfilepath=" + RVfilepath + ", RVfilesize=" + RVfilesize + "]";
 	}
+	
+	
 }

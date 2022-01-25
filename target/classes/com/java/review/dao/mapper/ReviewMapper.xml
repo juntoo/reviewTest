@@ -9,4 +9,9 @@
   		SELECT COUNT(*) FROM Review
   </select>
   
+  <insert id="reviewInsert" parameterType="com.java.review.dto.ReviewDto">
+  	INSERT INTO review(RVnumber, Mid, RTnumber, RVtitle, RVcontent, RVcount, RVdate, RVfilename, RVfilepath, RVfilesize)
+  	VALUES(Review_RVnumber_seq, ${Mid}, ${RTnumber}, ${RVtitle}, ${RVcontent}, ${RVcount}, SYSDATE, ${RVfilename}, ${RVfilepath}, ${RVfilesize})
+  </insert>
+  
   </mapper>

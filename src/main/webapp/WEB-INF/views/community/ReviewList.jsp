@@ -34,14 +34,14 @@
 					style="cursor: pointer; height: 630px; border-left: 0px; border-bottom: 0px;"></div>
 			</div>
 			
-			<c:if test="${count == 0}">
+			<c:if test="${count > 0}">
 				<div id="content" style="text-align: center; line-height: 750px; ">
 					아직 리뷰가 없습니다!
 					리뷰를 작성해주세요!
 				</div>
 			</c:if>
 			
-			<c:if test="${count > 0}">
+			<c:if test="${count == 0}">
 				<div id="content">
 					<div id="card">
 						<div id="card_content">
@@ -122,7 +122,7 @@
 							<button id="button1">></button>
 						</div>
 						<div>
-							<a href="http://122.34.87.29:8181/practice1/css/EventWrite.jsp">
+							<a href="${root}/community/ReviewWrite.do">
 								<input type="button" value="작성"
 								style="float: right; margin-right: 30px; cursor: pointer;" />
 							</a>

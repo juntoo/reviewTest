@@ -28,4 +28,20 @@ public class ReviewDaoImp implements ReviewDao {
 	public int getCount() {
 		return sqlSessionTemplate.selectOne("reviewCount");
 	}
+	
+	@Override
+	public int reviewWriteNumber(HashMap<String, Integer> hMap) {
+		
+		return sqlSessionTemplate.update("hMap", hMap);
+	}
+	
+	@Override
+	public int reviewWriteNumber(ReviewDto reviewDto) {
+		
+		int check;
+		
+		check=sqlSessionTemplate.insert("reviewInsert", reviewDto);
+		
+		return check;
+	}
 }
