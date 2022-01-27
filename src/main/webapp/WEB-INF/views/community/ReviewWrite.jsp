@@ -107,6 +107,10 @@ document.addEventListener('DOMContentLoaded', function(){
 						<input type="hidden" name="RVnumber" value="${RVnumber}">
 						
 					<div id="mid1">
+						<div id="searchBox">
+							<label>식당:<input type="text" id="search"onkeyup="filter()"placeholder="식당 이름을 검색하세요."/></label>
+							<input type="button" value="검색">
+						</div>
 						<span id="mid1_button">
 							<input type="submit" value="확인" /> <input type="button" value="취소"  onclick="location.href='${root}/community/ReviewList.do';"/>
 						</span>
