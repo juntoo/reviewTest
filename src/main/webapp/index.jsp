@@ -14,7 +14,7 @@
 	
 	<h3>회원 관리</h3>
 	
-	<c:if test="${id==null}">
+	<c:if test="${Mid==null}">
 		<a href="${root}/member/join.do">회원가입</a>&nbsp;&nbsp;
 		<a href="${root}/member/login.do">로그인</a>&nbsp;&nbsp;
 		<a href="${root}/member/Mypage-Acc.do">마이페이지-ACC</a>&nbsp;&nbsp;
@@ -23,7 +23,7 @@
 		<a href="${root}/member/Mypage-M-D.do">마이페이지-M-D</a>
 	</c:if>
 	
-	<c:if test="${id !=null}">
+	<c:if test="${Mid !=null}">
 		<a href="${root}/member/logout.do">로그아웃</a>
 		<a href="${root}/member/update.do">회원수정</a>
 		<a href="${root}/member/delete.do">회원탈퇴</a>

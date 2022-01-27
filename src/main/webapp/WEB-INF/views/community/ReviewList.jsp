@@ -35,14 +35,13 @@
 					style="cursor: pointer; height: 630px; border-left: 0px; border-bottom: 0px;"></div>
 			</div>
 
-			<%-- 			<c:if test="${count > 0}"> --%>
-			<!-- 				<div id="content" style="text-align: center; line-height: 750px; "> -->
-			<!-- 					아직 리뷰가 없습니다! -->
-			<!-- 					리뷰를 작성해주세요! -->
-			<!-- 				</div> -->
-			<%-- 			</c:if> --%>
-
-			<%-- 			<c:if test="${count == 0}"> --%>
+			<c:if test="${count > 0}">
+				<div id="content" style="text-align: center; line-height: 750px; ">
+					아직 리뷰가 없습니다!
+					리뷰를 작성해주세요!
+				</div>
+			</c:if>
+			
 			<div id="content">
 				<div id="card">
 					<div id="card_content">서울=연합뉴스) 이유미 김동현 기자 = 국민의힘 윤석열 대선 후보의
@@ -107,7 +106,7 @@
 							<img alt="1636904439.png"
 								src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20150803_11%2Fopera2528_1438599289948ID68K_JPEG%2Fnaver_com_20150714_193055.jpg&type=sc960_832">
 							<div id="card_text">
-								<div id="card_text2">달토끼가 떡 훔쳐갓다고 신고했습니다.</div>
+								<div id="card_text2">달토끼가 떡.</div>
 								달토끼 떡집
 							</div>
 						</div>
@@ -122,17 +121,15 @@
 						<button id="button1">3</button>
 						<button id="button1">></button>
 					</div>
-					<div>
-						<a href="${root}/community/ReviewWrite.do"> <input
-							type="button" value="작성"
-							style="float: right; margin-right: 30px; cursor: pointer;" />
-						</a>
-
-					</div>
+					<c:if test="${Mid != null}">
+						<div>
+							<a href="${root}/community/ReviewWrite.do"> 
+								<input type="button" value="작성" 	style="float: right; margin-right: 30px; cursor: pointer;" />
+							</a>
+						</div>
+					</c:if>
 				</div>
 			</div>
-			<%-- 			</c:if> --%>
-
 		</div>
 	</div>
 </body>

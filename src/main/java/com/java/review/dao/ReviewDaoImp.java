@@ -39,9 +39,14 @@ public class ReviewDaoImp implements ReviewDao {
 	@Override
 	public int reviewWriteNumber(ReviewDto reviewDto, ImgDto imgDto) {
 		
-		int check;
+		int check = 0;
 		
-		check=sqlSessionTemplate.insert("reviewInsert", reviewDto);
+		int reviewInsertCheck=sqlSessionTemplate.insert("reviewInsert", reviewDto);
+		int imgInsertCheck=sqlSessionTemplate.insert("imgInsert", imgDto);
+		
+		if(reviewInsertCheck>0 && imgInsertCheck>0) {
+			check=1;
+		}
 		
 		return check;
 	}

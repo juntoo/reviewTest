@@ -78,11 +78,13 @@ public class ReviewServiceImp implements ReviewService {
 		ImgDto imgDto=(ImgDto) map.get("ImgDto");
 		MultipartHttpServletRequest request=(MultipartHttpServletRequest) map.get("request");
 		
+		reviewWriterNumber(reviewDto);
+		
 		MultipartFile upFile=request.getFile("file");
+		LogAspect.logger.info(LogAspect.LogMsg+upFile.getName());
 		if(upFile.getSize() !=0) {
 			String Iname=Long.toString(System.currentTimeMillis())+"_"+upFile.getOriginalFilename();
-			int Inumber=reviewDto.getRVnumber();
-			String Icategory="RV"+Inumber;
+			String Icategory=reviewDto.getRVnumber();
 			long Isize=upFile.getSize();
 			LogAspect.logger.info(LogAspect.LogMsg+Iname+","+Isize);
 			
@@ -95,10 +97,9 @@ public class ReviewServiceImp implements ReviewService {
 				try {
 					upFile.transferTo(file);
 					
-					imgDto.setInumber(Inumber);
 					imgDto.setIname(Iname);
 					imgDto.setIsize(Isize);
-					imgDto.setIpath(path.getAbsolutePath());
+					imgDto.setIpath(file.getAbsolutePath());
 					imgDto.setIcategory(Icategory);
 					
 				}catch (Exception e) {
@@ -114,5 +115,9 @@ public class ReviewServiceImp implements ReviewService {
 		mav.addObject("check",check);
 		mav.setViewName("community/ReviewWriteOk");
 		
+	}
+	
+	public void reviewWriterNumber(ReviewDto reviewDto) {
+		String RVnumber=reviewDto.getRVnumber();
 	}
 }

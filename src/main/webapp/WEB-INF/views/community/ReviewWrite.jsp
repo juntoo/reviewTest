@@ -74,6 +74,13 @@ document.addEventListener('DOMContentLoaded', function(){
         document.querySelector('.dellink').style.display = 'none';
     });
 });
+
+function RTserch(root){
+	var url=root+"/community/RestaurantSerch.do";
+	//alert(url);
+	
+	window.open(url, "", "width=500, height=500");
+}
 </script>
 </head>
 <body>
@@ -100,7 +107,8 @@ document.addEventListener('DOMContentLoaded', function(){
 					style="height: 630px; border-left: 0px; border-bottom: 0px;"></div>
 			</div>
 			<div id="content">
-				<form action="${root}/community/ReviewWriteOk.do"
+				<form name="reviewForm"
+						action="${root}/community/ReviewWriteOk.do"
 						method="post"
 						enctype="multipart/form-data">
 						
@@ -108,8 +116,8 @@ document.addEventListener('DOMContentLoaded', function(){
 						
 					<div id="mid1">
 						<div id="searchBox">
-							<label>식당:<input type="text" id="search"onkeyup="filter()"placeholder="식당 이름을 검색하세요."/></label>
-							<input type="button" value="검색">
+							<label>식당:<input type="text" id="search" onkeyup="filter()" name="RTnumber"/></label>
+							<input type="button" value="식당검색" onclick="RTserch('${root}')"/>
 						</div>
 						<span id="mid1_button">
 							<input type="submit" value="확인" /> <input type="button" value="취소"  onclick="location.href='${root}/community/ReviewList.do';"/>
@@ -128,7 +136,7 @@ document.addEventListener('DOMContentLoaded', function(){
 					</div>
 					<div id="mid3">
 						<div>
-							nickname <input type="text" name="writer" value="${ReviewDto.Mid}" disabled="disabled"
+							memberId <input type="text" name="Mid" value="${Mid}" disabled="disabled"
 								style="width: 100px; text-align: center;" />
 						</div>
 					</div>

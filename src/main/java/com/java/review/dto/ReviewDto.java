@@ -3,31 +3,31 @@ package com.java.review.dto;
 import java.util.Date;
 
 public class ReviewDto {
-	private int RVnumber;	//글번호
-	private int RTnumber;	//레스토랑 고유번호
-	
+	private String RVnumber;	//글번호
 	private String Mid;		//회원아이디
+	private String RTnumber;	//레스토랑 고유번호
+	
 	private String RVtitle;	//글제목
 	private String RVcontent;	//글내용
 	private int RVcount;	//조회수
 	private Date RVdate;	//작성일
-	public int getRVnumber() {
+	public String getRVnumber() {
 		return RVnumber;
 	}
-	public void setRVnumber(int rVnumber) {
+	public void setRVnumber(String rVnumber) {
 		RVnumber = rVnumber;
-	}
-	public int getRTnumber() {
-		return RTnumber;
-	}
-	public void setRTnumber(int rTnumber) {
-		RTnumber = rTnumber;
 	}
 	public String getMid() {
 		return Mid;
 	}
 	public void setMid(String mid) {
 		Mid = mid;
+	}
+	public String getRTnumber() {
+		return RTnumber;
+	}
+	public void setRTnumber(String rTnumber) {
+		RTnumber = rTnumber;
 	}
 	public String getRVtitle() {
 		return RVtitle;
@@ -53,11 +53,10 @@ public class ReviewDto {
 	public void setRVdate(Date rVdate) {
 		RVdate = rVdate;
 	}
+	
 	@Override
 	public String toString() {
-		return "ReviewDto [RVnumber=" + RVnumber + ", RTnumber=" + RTnumber + ", Mid=" + Mid + ", RVtitle=" + RVtitle
+		return "ReviewDto [RVnumber=" + RVnumber + ", Mid=" + Mid + ", RTnumber=" + RTnumber + ", RVtitle=" + RVtitle
 				+ ", RVcontent=" + RVcontent + ", RVcount=" + RVcount + ", RVdate=" + RVdate + "]";
 	}
-	
-	
 }
