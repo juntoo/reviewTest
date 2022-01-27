@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.java.img.dto.ImgDto;
 import com.java.review.dto.ReviewDto;
 
 @Component
@@ -36,7 +37,7 @@ public class ReviewDaoImp implements ReviewDao {
 	}
 	
 	@Override
-	public int reviewWriteNumber(ReviewDto reviewDto) {
+	public int reviewWriteNumber(ReviewDto reviewDto, ImgDto imgDto) {
 		
 		int check;
 		

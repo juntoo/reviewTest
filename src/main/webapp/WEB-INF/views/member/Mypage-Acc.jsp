@@ -7,7 +7,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Mypage - Account</title>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript" src="${root}/resources/javascript/member.js"></script>
+<script type="text/javascript" src="${root}/resources/javascript/KakaoAddress.js"></script>
+<script type="text/javascript" src="${root}/resources/javascript/getmap.js"></script>
 <link rel="stylesheet" href="${root}/resources/css/member/member.css"/>
 </head>
 <body>
@@ -16,13 +19,13 @@
         <div id="menuF">
             <div id="category">
                 <div id="detail" style="border-left: 0px;"></div>
-                <div id="detail" ><a>Comment</a></div>
+                <div id="detail" onclick="location.href='${root}/member/Mypage-Com.do'"><a>Comment</a></div>
                 <div id="detail" style="border-right: 0px;"><a>Account</a></div>
                 <div id="detail" style="height: 660px; border-left: 0px; border-bottom: 0px;"></div>
             </div>
             
             <div id="content">
-            	<form name="memberForm"  id="form_style" action="#" method="post" onsubmit="return registerForm(this)">
+            	<form name="memberForm"  id="form_style" action="${root}/member/updata.do?Mid=${memberDto.mid}" method="post" onsubmit="return joinForm(this)">
 	                <div style="border : 2px black solid;  width: 1205px; height: 665px; margin-top: 40px; margin-left: 50px;">
 	                    <div id="Account">
 							<label class="name" style="margin-left: 50px;">Account</label>
@@ -33,15 +36,15 @@
 								<div class="line">
 									<label class="title">Name</label>
 									<span class="content">
-										<input type="text" name="Mname" value="${memberDto.Mname}" disabled="disabled"/>
+										<input type="text" name="Mname" value="${memberDto.mname}" disabled="disabled"/>
 									</span>
 								</div>
 								
 								<div class="line">
 									<label class="title">Regi.Num</label>
 									<span class="content">
-										<input type="text" name="Mresidentnumber1" size="11" maxlength="6" value="${memberDto.Mresidentnumber1}" disabled="disabled"/>
-										- <input type="password" name="Mresidentnumber2" size="12" maxlength="7" value="${memberDto.Mresidentnumber2}" disabled="disabled"/>
+										<input type="text" name="Mresidentnumber1" size="11" maxlength="6" value="${memberDto.mresidentnumber1}" disabled="disabled"/>
+										- <input type="password" name="Mresidentnumber2" size="12" maxlength="7" value="${memberDto.mresidentnumber2}" disabled="disabled"/>
 									</span>	
 								</div>
 								
@@ -49,36 +52,36 @@
 									<label class="title">ID</label>  
 									
 									<span class="content"> 
-										<input type="text" name="Mid" value="${memberDto.Mid}" disabled="disabled"/>
+										<input type="text" name="Mid" value="${memberDto.mid}" disabled="disabled"/>
 									</span>
 								</div>
 								
 								<div class="line">
 									<label class="title">Password</label>
 									<span class="content">
-										<input type="password" name="Mpassword" value="${memberDto.Mpassword}"/>
+										<input type="password" name="Mpassword" value="${memberDto.mpassword}"/>
 									</span>
 								</div>
 								
 								<div class="line">
 									<label class="title"></label>
 									<span class="content">
-										<input type="password" name="MpasswordCheck"value="${memberDto.MpasswordCheck}"/>
+										<input type="password" name="MpasswordCheck"/>
 									</span>
 								</div>
 								
 								<div class="line">
 									<label class="title">Address</label>
 									<span class="content">
-										<input type="text" name="Mpostalcode" value="${memberDto.Mpostalcode}"/>
-										<input type="button" value="Search" />
+					                    <input type="text" id="sample4_postcode" placeholder="우편번호" name="Mpostalcode" size="7"/>
+					                    <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"/>
 									</span>
 							  	</div>
 								
 								<div class="line">
 									<label class="title"></label>
 									<span class="content">
-										<input type="text" name="Maddress" size="40" value="${memberDto.Maddress}"/>
+										<input type="text" id="sample4_roadAddress" placeholder="도로명주소" name="Maddress" size="30" />
 									</span>
 								</div>
 								
@@ -86,7 +89,7 @@
 									<label class="title">E-Mail</label>
 									
 									<span class="content">
-										<input type="text" name="Memail" size="25" value="${memberDto.Memail}"/>
+										<input type="text" name="Memail" size="25" value="${memberDto.memail}"/>
 									</span>
 								</div>
 								
@@ -94,9 +97,9 @@
 									<label class="title">Tel)</label>
 									
 									<span class="content">
-										<input type="text" name="Mcallnumber1" size="5" maxlength="3" value="${memberDto.Mcallnumber1}"/>
-										<input type="text" name="Mcallnumber2" size="10" maxlength="4" value="${memberDto.Mcallnumber2}"/>
-										<input type="text" name="Mcallnumber3" size="10" maxlength="4" value="${memberDto.Mcallnumber3}"/>
+										<input type="text" name="Mcallnumber1" size="5" maxlength="3" value="${memberDto.mcallnumber1}"/>
+										<input type="text" name="Mcallnumber2" size="10" maxlength="4" value="${memberDto.mcallnumber2}"/>
+										<input type="text" name="Mcallnumber3" size="10" maxlength="4" value="${memberDto.mcallnumber3}"/>
 									</span>	
 								</div>
 							</div>

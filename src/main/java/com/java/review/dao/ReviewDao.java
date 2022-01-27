@@ -3,6 +3,7 @@ package com.java.review.dao;
 import java.util.HashMap;
 import java.util.List;
 
+import com.java.img.dto.ImgDto;
 import com.java.review.dto.ReviewDto;
 
 public interface ReviewDao {
@@ -13,5 +14,5 @@ public interface ReviewDao {
 	
 	public int reviewWriteNumber(HashMap<String, Integer> hMap);
 	
-	public int reviewWriteNumber(ReviewDto reviewDto);
+	public int reviewWriteNumber(ReviewDto reviewDto, ImgDto imgDto);
 }

@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.taglibs.standard.extra.spath.AbsolutePath;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
@@ -13,6 +14,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.java.aop.LogAspect;
+import com.java.img.dto.ImgDto;
 import com.java.review.dao.ReviewDao;
 import com.java.review.dto.ReviewDto;
 
@@ -73,26 +75,32 @@ public class ReviewServiceImp implements ReviewService {
 	public void reviewWriteOk(ModelAndView mav) {
 		Map<String, Object> map=mav.getModelMap();
 		ReviewDto reviewDto=(ReviewDto) map.get("reviewDto");
+		ImgDto imgDto=(ImgDto) map.get("ImgDto");
 		MultipartHttpServletRequest request=(MultipartHttpServletRequest) map.get("request");
 		
 		MultipartFile upFile=request.getFile("file");
 		if(upFile.getSize() !=0) {
-			String filename=Long.toString(System.currentTimeMillis())+"_"+upFile.getOriginalFilename();
-			long filesize=upFile.getSize();
-			LogAspect.logger.info(LogAspect.LogMsg+filename+","+filesize);
+			String Iname=Long.toString(System.currentTimeMillis())+"_"+upFile.getOriginalFilename();
+			int Inumber=reviewDto.getRVnumber();
+			String Icategory="RV"+Inumber;
+			long Isize=upFile.getSize();
+			LogAspect.logger.info(LogAspect.LogMsg+Iname+","+Isize);
 			
-			File path=new File("C:\\pds\\");
+			File path=new File("/YMJJtest/src/main/webapp/resources/img");
 			path.mkdir();
 			
 			if(path.exists() && path.isDirectory()) {
-				File file=new File(path, filename);
+				File file=new File(path, Iname);
 				
 				try {
 					upFile.transferTo(file);
 					
-					reviewDto.setRVfilename(filename);
-					reviewDto.setRVfilepath(file.getAbsolutePath());
-					reviewDto.setRVfilesize(filesize);
+					imgDto.setInumber(Inumber);
+					imgDto.setIname(Iname);
+					imgDto.setIsize(Isize);
+					imgDto.setIpath(path.getAbsolutePath());
+					imgDto.setIcategory(Icategory);
+					
 				}catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -100,7 +108,7 @@ public class ReviewServiceImp implements ReviewService {
 		}
 		
 		LogAspect.logger.info(LogAspect.LogMsg+reviewDto.toString());
-		int check=reviewDao.reviewWriteNumber(reviewDto);
+		int check=reviewDao.reviewWriteNumber(reviewDto, imgDto);
 		LogAspect.logger.info(LogAspect.LogMsg+check);
 		
 		mav.addObject("check",check);
