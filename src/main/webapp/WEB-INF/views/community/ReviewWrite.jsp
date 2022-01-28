@@ -108,11 +108,11 @@ function RTserch(root){
 			</div>
 			<div id="content">
 				<form name="reviewForm"
-						action="${root}/community/ReviewWriteOk.do"
+						action="${root}/community/ReviewWriteOk.do?root=${root}"
 						method="post"
 						enctype="multipart/form-data">
 						
-						<input type="hidden" name="RVnumber" value="${RVnumber}">
+						<input type="hidden" name="Mid" value="${Mid}"/>
 						
 					<div id="mid1">
 						<div id="searchBox">
@@ -136,7 +136,7 @@ function RTserch(root){
 					</div>
 					<div id="mid3">
 						<div>
-							memberId <input type="text" name="Mid" value="${Mid}" disabled="disabled"
+							memberId <input type="text" value="${Mname}" disabled="disabled"
 								style="width: 100px; text-align: center;" />
 						</div>
 					</div>
@@ -147,7 +147,7 @@ function RTserch(root){
 					</div>
 					<div id="mid5">
 						<span>
-							<input type="file" id="imageSelector" accept="image/*" onchange="setThumbnail(event);"/>
+							<input type="file" name="file" id="imageSelector" accept="image/*" onchange="setThumbnail(event);"/>
 						</span>
 					</div>
 					<div id="mid6">

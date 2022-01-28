@@ -11,8 +11,7 @@
 <body>
 	<c:if test="${check > 0}">
 		<script type="text/javascript">
-			alert("정상적으로 작성 되었습니다.");
-			location.href="${root}/community/ReviewList.do"
+			location.href="${root}/community/ReviewImgCheck.do"
 		</script>
 	</c:if>
 	

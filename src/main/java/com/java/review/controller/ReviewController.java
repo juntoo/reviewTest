@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.java.img.dto.ImgDto;
 import com.java.review.dto.ReviewDto;
 import com.java.review.service.ReviewService;
 
@@ -26,7 +27,6 @@ public class ReviewController {
 		reviewService.reviewList(mav);
 		
 		return mav;
-		//return new ModelAndView("community/ReviewList");
 	}
 	
 	@RequestMapping(value="/community/ReviewRead.do", method = RequestMethod.GET)
@@ -48,18 +48,21 @@ public class ReviewController {
 		reviewService.reviewWrite(mav);
 		
 		return mav;
-		//return mav;
 	}
 	
 	@RequestMapping(value="/community/ReviewWriteOk.do", method = RequestMethod.POST)
-	public ModelAndView reviewWriteOk(HttpServletRequest request,HttpServletResponse response, ReviewDto reviewDto) {
+	public ModelAndView reviewWriteOk(HttpServletRequest request,HttpServletResponse response, ReviewDto reviewDto, ImgDto imgDto) {
 		
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("request",request);
 		mav.addObject("reviewDto",reviewDto);
+		mav.addObject("imgDto", imgDto);
 		
 		reviewService.reviewWriteOk(mav);
 		
-		return null;
+		return mav;
 	}
+	
+	//@RequestMapping(value="/community/ReviewImgCheckOk.do", method = RequestMethod.POST)
+	
 }

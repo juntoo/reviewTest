@@ -11,11 +11,11 @@
   
   <insert id="reviewInsert" parameterType="com.java.review.dto.ReviewDto">
   	INSERT INTO review(RVnumber, Mid, RTnumber, RVtitle, RVcontent, RVcount, RVdate)
-  	VALUES('RV'||Review_RVnumber_seq, ${Mid}, ${RTnumber}, ${RVtitle}, ${RVcontent}, ${RVcount}, SYSDATE)
+  	VALUES('RV'||Review_RVnumber_seq.nextval, #{Mid}, #{RTnumber}, #{RVtitle}, #{RVcontent}, #{RVcount}, SYSDATE)
   </insert>
   
   <insert id="imgInsert" parameterType="com.java.img.dto.ImgDto" >
-  	INSERT INTO Img VALUES(Img_Inumber_seq, #{Icategory}, #{Iname}, #{Isize}, #{Ipath})
+  	INSERT INTO Img VALUES(Img_Inumber_seq.nextval, #{RVnumber}, #{Iname}, #{Isize}, #{Ipath})
   </insert>
   
   </mapper>

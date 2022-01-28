@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.java.aop.LogAspect;
 import com.java.img.dto.ImgDto;
 import com.java.review.dto.ReviewDto;
 
@@ -31,16 +32,17 @@ public class ReviewDaoImp implements ReviewDao {
 	}
 	
 	@Override
-	public int reviewWriteNumber(HashMap<String, Integer> hMap) {
+	public int reviewWriteOk(ReviewDto reviewDto, ImgDto imgDto) {
 		
-		return sqlSessionTemplate.update("hMap", hMap);
+		return 0;
 	}
+	 
 	
 	@Override
 	public int reviewWriteNumber(ReviewDto reviewDto, ImgDto imgDto) {
 		
 		int check = 0;
-		
+		LogAspect.logger.info(LogAspect.LogMsg+reviewDto.toString());
 		int reviewInsertCheck=sqlSessionTemplate.insert("reviewInsert", reviewDto);
 		int imgInsertCheck=sqlSessionTemplate.insert("imgInsert", imgDto);
 		

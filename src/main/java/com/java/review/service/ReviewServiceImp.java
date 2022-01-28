@@ -60,13 +60,7 @@ public class ReviewServiceImp implements ReviewService {
 		Map<String, Object> map=mav.getModelMap();
 		HttpServletRequest request=(HttpServletRequest) map.get("request");
 		
-		int RVnumber=0;
-		
-		if(request.getParameter("RVnumber") !=null) {
-			RVnumber=Integer.parseInt(request.getParameter("RVnumber"));
-		}
-		
-		mav.addObject("RVnumber", RVnumber);
+		mav.addObject("request", request);
 		
 		mav.setViewName("community/ReviewWrite");
 	}
@@ -75,20 +69,18 @@ public class ReviewServiceImp implements ReviewService {
 	public void reviewWriteOk(ModelAndView mav) {
 		Map<String, Object> map=mav.getModelMap();
 		ReviewDto reviewDto=(ReviewDto) map.get("reviewDto");
-		ImgDto imgDto=(ImgDto) map.get("ImgDto");
+		ImgDto imgDto=(ImgDto) map.get("imgDto");
+		LogAspect.logger.info(LogAspect.LogMsg+reviewDto.toString());
 		MultipartHttpServletRequest request=(MultipartHttpServletRequest) map.get("request");
-		
-		reviewWriterNumber(reviewDto);
 		
 		MultipartFile upFile=request.getFile("file");
 		LogAspect.logger.info(LogAspect.LogMsg+upFile.getName());
 		if(upFile.getSize() !=0) {
-			String Iname=Long.toString(System.currentTimeMillis())+"_"+upFile.getOriginalFilename();
-			String Icategory=reviewDto.getRVnumber();
+			String Iname=upFile.getOriginalFilename();
 			long Isize=upFile.getSize();
 			LogAspect.logger.info(LogAspect.LogMsg+Iname+","+Isize);
 			
-			File path=new File("/YMJJtest/src/main/webapp/resources/img");
+			File path=new File("${root}/resources/img");
 			path.mkdir();
 			
 			if(path.exists() && path.isDirectory()) {
@@ -100,7 +92,6 @@ public class ReviewServiceImp implements ReviewService {
 					imgDto.setIname(Iname);
 					imgDto.setIsize(Isize);
 					imgDto.setIpath(file.getAbsolutePath());
-					imgDto.setIcategory(Icategory);
 					
 				}catch (Exception e) {
 					e.printStackTrace();
@@ -108,16 +99,20 @@ public class ReviewServiceImp implements ReviewService {
 			}
 		}
 		
-		LogAspect.logger.info(LogAspect.LogMsg+reviewDto.toString());
-		int check=reviewDao.reviewWriteNumber(reviewDto, imgDto);
+		int check=reviewDao.reviewWriteOk(reviewDto, imgDto);
+		LogAspect.logger.info(LogAspect.LogMsg+reviewDto.toString()+","+imgDto.toString());
+		//int check=reviewDao.reviewWriteNumber(reviewDto, imgDto);
 		LogAspect.logger.info(LogAspect.LogMsg+check);
 		
 		mav.addObject("check",check);
+		mav.addObject("request",request);
 		mav.setViewName("community/ReviewWriteOk");
 		
 	}
 	
+	
 	public void reviewWriterNumber(ReviewDto reviewDto) {
 		String RVnumber=reviewDto.getRVnumber();
+		
 	}
 }
