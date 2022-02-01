@@ -32,11 +32,28 @@ public class ReviewDaoImp implements ReviewDao {
 	}
 	
 	@Override
-	public int reviewWriteOk(ReviewDto reviewDto, ImgDto imgDto) {
+	public int reviewWriteOk(ReviewDto reviewDto) {
 		
-		return 0;
+		return sqlSessionTemplate.insert("reviewInsert", reviewDto);
 	}
 	 
+	@Override
+	public int imgWriteOk(ImgDto imgDto) {
+		
+		return sqlSessionTemplate.insert("insert", imgDto);
+	}
+	
+	@Override
+	public ReviewDto read(String RVnumber) {
+		ReviewDto reviewDto=null;
+		
+		int check=sqlSessionTemplate.update("reviewReadCount", RVnumber);
+		LogAspect.logger.info(LogAspect.LogMsg+check);
+		
+		reviewDto=sqlSessionTemplate.selectOne("reviewRead",RVnumber);
+		
+		return reviewDto;
+	}
 	
 	@Override
 	public int reviewWriteNumber(ReviewDto reviewDto, ImgDto imgDto) {

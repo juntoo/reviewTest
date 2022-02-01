@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.java.aop.LogAspect;
 import com.java.img.dto.ImgDto;
+import com.java.restaurant.dto.RestaurnatDto;
 import com.java.review.dao.ReviewDao;
 import com.java.review.dto.ReviewDto;
 
@@ -32,14 +33,14 @@ public class ReviewServiceImp implements ReviewService {
 		if(pageNumber == null) pageNumber="1";
 		
 		int currentPage=Integer.parseInt(pageNumber);
-		LogAspect.logger.info(LogAspect.LogMsg+currentPage);
+		LogAspect.logger.info(LogAspect.LogMsg+"currentPage:"+currentPage);
 		
 		int boardSize=4;
 		int startRow=(currentPage-1)*boardSize+1;
 		int endRow=currentPage*boardSize;
 		
 		int count=reviewDao.getCount();
-		LogAspect.logger.info(LogAspect.LogMsg+count);
+		LogAspect.logger.info(LogAspect.LogMsg+"count:"+count);
 		
 		List<ReviewDto> reviewList=null;
 		if(count > 0) {
@@ -55,58 +56,165 @@ public class ReviewServiceImp implements ReviewService {
 		mav.setViewName("community/ReviewList");
 	}
 	
+//	@Override
+//	public void reviewWrite(ModelAndView mav) {
+//		Map<String, Object> map=mav.getModelMap();
+//		HttpServletRequest request=(HttpServletRequest) map.get("request");
+//		
+//		mav.addObject("request", request);
+//		
+//		mav.setViewName("community/ReviewWrite");
+//	}
+	
 	@Override
 	public void reviewWrite(ModelAndView mav) {
+		
+		int Inumber=0;
+		String RVnumber="0";
+		String Icategory="0";
+		
 		Map<String, Object> map=mav.getModelMap();
 		HttpServletRequest request=(HttpServletRequest) map.get("request");
 		
-		mav.addObject("request", request);
+		if(request.getParameter("RVnumber") !=null) {
+			RVnumber=(request.getParameter("RVnumber"));
+			
+		}
+		
+		if(request.getParameter("insert") !=null) {
+			Inumber=Integer.parseInt(request.getParameter("Inumber"));
+			Icategory=request.getParameter("Icategory");
+		}
+		
+		mav.addObject("RVnumber", RVnumber);
+		
+		mav.addObject("Inumber", Inumber);
+		mav.addObject("Icategory", Icategory);
 		
 		mav.setViewName("community/ReviewWrite");
+		
 	}
 	
 	@Override
 	public void reviewWriteOk(ModelAndView mav) {
 		Map<String, Object> map=mav.getModelMap();
 		ReviewDto reviewDto=(ReviewDto) map.get("reviewDto");
-		ImgDto imgDto=(ImgDto) map.get("imgDto");
-		LogAspect.logger.info(LogAspect.LogMsg+reviewDto.toString());
+		
+		int check=reviewDao.reviewWriteOk(reviewDto);
+		LogAspect.logger.info(LogAspect.LogMsg + check);
+		mav.addObject("check", check);
+
+		//Map<String, Object> map=mav.getModelMap();
+		//writeNumber(restaurnatDto);
+		ImgDto imgDto = (ImgDto) map.get("imgDto");
 		MultipartHttpServletRequest request=(MultipartHttpServletRequest) map.get("request");
 		
 		MultipartFile upFile=request.getFile("file");
-		LogAspect.logger.info(LogAspect.LogMsg+upFile.getName());
+		LogAspect.logger.info(LogAspect.LogMsg + upFile);
 		if(upFile.getSize() !=0) {
-			String Iname=upFile.getOriginalFilename();
-			long Isize=upFile.getSize();
-			LogAspect.logger.info(LogAspect.LogMsg+Iname+","+Isize);
+			String fileName=Long.toString(System.currentTimeMillis()) + "_" + upFile.getOriginalFilename();
+			String Icategory = "0";
+			long fileSize=upFile.getSize();
+			LogAspect.logger.info(LogAspect.LogMsg + fileName + ","  + fileSize);
 			
-			File path=new File("${root}/resources/img");
+			File path=new File("F:\\pds\\");
 			path.mkdir();
+			LogAspect.logger.info(LogAspect.LogMsg + path);
+			LogAspect.logger.info(LogAspect.LogMsg + fileName);
 			
 			if(path.exists() && path.isDirectory()) {
-				File file=new File(path, Iname);
+				File file=new File(path, fileName);
 				
+				LogAspect.logger.info(LogAspect.LogMsg + imgDto.toString());
 				try {
 					upFile.transferTo(file);
 					
-					imgDto.setIname(Iname);
-					imgDto.setIsize(Isize);
 					imgDto.setIpath(file.getAbsolutePath());
-					
-				}catch (Exception e) {
+					imgDto.setIname(fileName);
+					imgDto.setIsize(fileSize);
+					imgDto.setIcategory(Icategory);
+				}catch(Exception e) {
 					e.printStackTrace();
 				}
-			}
+			}	
 		}
 		
-		int check=reviewDao.reviewWriteOk(reviewDto, imgDto);
-		LogAspect.logger.info(LogAspect.LogMsg+reviewDto.toString()+","+imgDto.toString());
-		//int check=reviewDao.reviewWriteNumber(reviewDto, imgDto);
-		LogAspect.logger.info(LogAspect.LogMsg+check);
+		//LogAspect.logger.info(LogAspect.LogMsg + restaurnatDto.toString());
+//		 DB
 		
-		mav.addObject("check",check);
-		mav.addObject("request",request);
+		LogAspect.logger.info(LogAspect.LogMsg + imgDto.toString());
+		int check2=reviewDao.imgWriteOk(imgDto);
+		LogAspect.logger.info(LogAspect.LogMsg + check2);
+		
+		mav.addObject("check", check2);
+	
+		//imgWrite(mav);
 		mav.setViewName("community/ReviewWriteOk");
+		
+	}
+	
+//	@Override
+//	public void reviewWriteOk(ModelAndView mav) {
+//		Map<String, Object> map=mav.getModelMap();
+//		ReviewDto reviewDto=(ReviewDto) map.get("reviewDto");
+//		ImgDto imgDto=(ImgDto) map.get("imgDto");
+//		LogAspect.logger.info(LogAspect.LogMsg+reviewDto.toString());
+//		MultipartHttpServletRequest request=(MultipartHttpServletRequest) map.get("request");
+//		
+//		MultipartFile upFile=request.getFile("file");
+//		LogAspect.logger.info(LogAspect.LogMsg+upFile.getName());
+//		if(upFile.getSize() !=0) {
+//			String Iname=upFile.getOriginalFilename();
+//			long Isize=upFile.getSize();
+//			LogAspect.logger.info(LogAspect.LogMsg+Iname+","+Isize);
+//			
+//			File path=new File("${root}/resources/img");
+//			path.mkdir();
+//			
+//			if(path.exists() && path.isDirectory()) {
+//				File file=new File(path, Iname);
+//				
+//				try {
+//					upFile.transferTo(file);
+//					
+//					imgDto.setIname(Iname);
+//					imgDto.setIsize(Isize);
+//					imgDto.setIpath(file.getAbsolutePath());
+//					
+//				}catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		}
+//		
+//		int check=reviewDao.reviewWriteOk(reviewDto, imgDto);
+//		LogAspect.logger.info(LogAspect.LogMsg+reviewDto.toString()+","+imgDto.toString());
+//		//int check=reviewDao.reviewWriteNumber(reviewDto, imgDto);
+//		LogAspect.logger.info(LogAspect.LogMsg+check);
+//		
+//		mav.addObject("check",check);
+//		mav.addObject("request",request);
+//		mav.setViewName("community/ReviewWriteOk");
+//		
+//	}
+	
+	@Override
+	public void reviewRead(ModelAndView mav) {
+		Map<String, Object> map=mav.getModelMap();
+		HttpServletRequest request=(HttpServletRequest) map.get("request");
+		
+		String RVnumber=request.getParameter("RVnumber");
+		int pageNumber=Integer.parseInt(request.getParameter("pageNumber"));
+		LogAspect.logger.info(LogAspect.LogMsg + RVnumber + "," + pageNumber);
+		
+		ReviewDto reviewDto=reviewDao.read(RVnumber);
+		LogAspect.logger.info(LogAspect.LogMsg + reviewDto.toString());
+		
+		
+		
+		mav.addObject("reviewDto", reviewDto);
+		mav.addObject("pageNumber", pageNumber);
+		mav.setViewName("community/ReviewRead");
 		
 	}
 	

@@ -11,7 +11,11 @@ public interface ReviewDao {
 	
 	public List<ReviewDto> reviewList(int startRow, int endRow);
 	
-	public int reviewWriteOk(ReviewDto reviewDto, ImgDto imgDto);
+	public int reviewWriteOk(ReviewDto reviewDto);
+	
+	public int imgWriteOk(ImgDto imgDto);
+	
+	public ReviewDto read(String RVnumber);
 	
 	public int reviewWriteNumber(ReviewDto reviewDto, ImgDto imgDto);
 }

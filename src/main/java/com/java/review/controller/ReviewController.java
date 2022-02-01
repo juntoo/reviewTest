@@ -31,7 +31,12 @@ public class ReviewController {
 	
 	@RequestMapping(value="/community/ReviewRead.do", method = RequestMethod.GET)
 	public ModelAndView reviewRead(HttpServletRequest request,HttpServletResponse response) {
-		return new ModelAndView("community/ReviewRead");
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("request",request);
+		
+		reviewService.reviewRead(mav);
+		
+		return mav;
 	}
 	
 	@RequestMapping(value="/community/ReviewUpdate.do", method = RequestMethod.GET)
