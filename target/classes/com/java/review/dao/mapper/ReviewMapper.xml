@@ -14,7 +14,9 @@
   		<result column="RVcontent"  property="RVcontent"/>
   		<result column="RVcount"  property="RVcount"/>
   		<result column="RVdate"  property="RVdate"/>
-  		
+  		<result column="RVimgname"  property="RVimgname"/>
+  		<result column="RVimgsize"  property="RVimgsize"/>
+  		<result column="RVimgpath"  property="RVimgpath"/>
   	</resultMap>
   
   <select id="reviewCount" resultType="int">
@@ -26,8 +28,8 @@
   </select>
   
   <insert id="reviewInsert" parameterType="com.java.review.dto.ReviewDto">
-  	INSERT INTO review(RVnumber, Mid, RTnumber, RTname, RVtitle, RVcontent, RVcount, RVdate, RVimgname, RVimgpath, RVimgsize)
-  	VALUES(Review_RVnumber_seq.nextval, #{Mid}, #{RTnumber}, #{RTname}, #{RVtitle}, #{RVcontent}, #{RVcount}, SYSDATE, #{RVimgname}, #{RVimgpath}, #{RVimgsize})
+  	INSERT INTO review(RVnumber, Writer, RTnumber, RTname, RVtitle, RVcontent, RVcount, RVdate, RVimgname, RVimgpath, RVimgsize)
+  	VALUES('RV0'||Review_RVnumber_seq.nextval, #{Writer}, #{RTnumber}, #{RTname}, #{RVtitle}, #{RVcontent}, #{RVcount}, SYSDATE, #{RVimgname}, #{RVimgpath}, #{RVimgsize})
   </insert>
   
   <select id="reviewList" parameterType="java.util.HashMap" resultMap="reviewDto">
@@ -39,11 +41,11 @@
 		]]>
   </select>
   
-  <update id="reviewReadCount" parameterType="int">
+  <update id="reviewReadCount" parameterType="String">
   		UPDATE review SET RVcount=RVcount+1 WHERE RVnumber=#{RVnumber}
   </update>
   
-  <select id="reviewRead" parameterType="int" resultMap="reviewDto">
+  <select id="reviewRead" parameterType="String" resultMap="reviewDto">
   	SELECT * FROM review WHERE RVnumber=#{RVnumber}
   </select>
   

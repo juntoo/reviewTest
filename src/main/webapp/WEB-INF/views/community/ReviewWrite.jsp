@@ -112,14 +112,14 @@ function RTsearch(root){
 						method="post"
 						enctype="multipart/form-data">
 						
-						<input type="hidden" name="Mid" value="${Mid}"/>
-						<input type="hidden" name="RTname" value="${RTname}"/>
-						<input type="hidden" name="RTnumber" value="${RTnumber}"/>
+						<input type="hidden" name="Writer" value="${Mid}"/>
+<%-- 						<input type="hidden" name="RTname" value="${RTname}"/> --%>
+<%-- 						<input type="hidden" name="RTnumber" value="${RTnumber}"/> --%>
 						
 					<div id="mid1">
 						<div id="searchBox">
-							<label>식당고유번호:<input type="text" id="search" onkeyup="filter()" name="RTnumber"/></label>
-							<label>식당이름:<input type="text" id="search" onkeyup="filter()" name="RTname"/></label>
+							<label>식당고유번호<input type="text" id="search" name="RTnumber"/></label>
+							<label>식당이름<input type="text" id="search" name="RTname"/></label>
 							<input type="button" value="식당검색" onclick="RTsearch('${root}')"/>
 						</div>
 						<span id="mid1_button">

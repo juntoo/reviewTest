@@ -34,9 +34,12 @@
 			</div>
 			<div id="content">
 				<div id="mid1">
-					<span id="viewcount">조회수 : ${reviewDto.RVcount}</span>  
+					<span id="viewcount">조회수 : ${reviewDto.RVcount} </span>  
 					<span id="mid1_button">
-						<input type="button" value="수정" />
+						<c:if test="${Mid == reviewDto.writer || Mid == 'admin'}">
+							<input type="button" value="수정" />
+							<input type="button" value="삭제" />
+						</c:if>
 					</span>
 				</div>
 				<div id="mid2">
@@ -45,8 +48,7 @@
 					</div>
 					<div id="mid3">
 						<div>
-							${Mid} <input type="text" value="${Mid}" disabled="disabled"
-								style="width: 100px; text-align: center;" />
+							작성자 <input type="text" value="${reviewDto.writer}" disabled="disabled"	style="width: 100px; text-align: center;" />
 						</div>
 					</div>
 					<div id="mid4">
@@ -63,7 +65,7 @@
 							${reviewDto.RVcontent}
 						</div>
 						<div>
-							<a href="http://122.34.87.29:8181/practice1/css/EventList.jsp"><input
+							<a href="${root}/community/ReviewList.do"><input
 								type="button" value="목록"
 								style="float: right; margin-right: 30px;" /></a>
 						</div>

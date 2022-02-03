@@ -218,11 +218,12 @@
 }
 
 #reviewListBot{
-	display: table-cell;
-	width: 1382px;
+	position:absolute;
+	width: 1305.6px;
 	height: 50px;
 	text-align: center;
 	float: center;
+	top: 670px;
 }
 
 #reviewListBot > a {

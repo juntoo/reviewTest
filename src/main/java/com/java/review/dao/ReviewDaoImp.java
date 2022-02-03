@@ -32,18 +32,13 @@ public class ReviewDaoImp implements ReviewDao {
 	}
 	
 	@Override
-	public String getRTname() {
-		return sqlSessionTemplate.selectOne("getRTname");
-	}
-	
-	@Override
 	public int reviewWriteOk(ReviewDto reviewDto) {
 		
 		return sqlSessionTemplate.insert("reviewInsert", reviewDto);
 	}
 	
 	@Override
-	public ReviewDto read(int RVnumber) {
+	public ReviewDto read(String RVnumber) {
 		ReviewDto reviewDto=null;
 		
 		int check=sqlSessionTemplate.update("reviewReadCount", RVnumber);
@@ -61,5 +56,5 @@ public class ReviewDaoImp implements ReviewDao {
 		return check;
 	}
 	
-	
+
 }

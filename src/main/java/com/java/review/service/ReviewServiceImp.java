@@ -42,9 +42,6 @@ public class ReviewServiceImp implements ReviewService {
 		int count=reviewDao.getCount();
 		LogAspect.logger.info(LogAspect.LogMsg+"count:"+count);
 		
-		String RTname=reviewDao.getRTname();
-		LogAspect.logger.info(LogAspect.LogMsg+"RTname:"+RTname);
-		
 		List<ReviewDto> reviewList=null;
 		if(count > 0) {
 			reviewList=reviewDao.reviewList(startRow, endRow);
@@ -55,7 +52,6 @@ public class ReviewServiceImp implements ReviewService {
 		mav.addObject("currentPage",currentPage);
 		mav.addObject("ReviewList", reviewList);
 		mav.addObject("count", count);
-		mav.addObject("RTname",RTname);
 		
 		mav.setViewName("community/ReviewList");
 	}
@@ -75,10 +71,10 @@ public class ReviewServiceImp implements ReviewService {
 		Map<String, Object> map=mav.getModelMap();
 		HttpServletRequest request=(HttpServletRequest) map.get("request");
 		
-		int RVnumber=0;
+		String RVnumber=null;
 		
 		if(request.getParameter("RVnumber")!=null) {
-			RVnumber=Integer.parseInt(request.getParameter("RVnumber"));
+			RVnumber=request.getParameter("RVnumber");
 		}
 		
 		mav.addObject("RVnumber", RVnumber);
@@ -100,10 +96,11 @@ public class ReviewServiceImp implements ReviewService {
 			long fileSize=upFile.getSize();
 			LogAspect.logger.info(LogAspect.LogMsg + fileName + ","  + fileSize);
 			
-			File path=new File(root+"/resources/img/");
+			File path=new File("F:\\pds\\");
 			path.mkdir();
 			LogAspect.logger.info(LogAspect.LogMsg + path);
 			LogAspect.logger.info(LogAspect.LogMsg + fileName);
+			LogAspect.logger.info(LogAspect.LogMsg + path.exists() +","+path.isDirectory());
 			
 			if(path.exists() && path.isDirectory()) {
 				File file=new File(path, fileName);
@@ -135,8 +132,9 @@ public class ReviewServiceImp implements ReviewService {
 		Map<String, Object> map=mav.getModelMap();
 		HttpServletRequest request=(HttpServletRequest) map.get("request");
 		
-		int RVnumber=Integer.parseInt(request.getParameter("RVnumber"));
+		String RVnumber=request.getParameter("RVnumber");
 		int pageNumber=Integer.parseInt(request.getParameter("pageNumber"));
+		
 		LogAspect.logger.info(LogAspect.LogMsg + RVnumber + "," + pageNumber);
 		
 		ReviewDto reviewDto=reviewDao.read(RVnumber);

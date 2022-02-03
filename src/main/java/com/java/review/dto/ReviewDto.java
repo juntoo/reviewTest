@@ -3,9 +3,9 @@ package com.java.review.dto;
 import java.util.Date;
 
 public class ReviewDto {
-	private int RVnumber;	//글번호
-	private String Mid;		//회원아이디
-	private int RTnumber;	//레스토랑 고유번호
+	private String RVnumber;	//글번호
+	private String Writer;		//회원아이디
+	private String RTnumber;	//레스토랑 고유번호
 	private String RTname;
 	
 	private String RVtitle;	//글제목
@@ -16,22 +16,22 @@ public class ReviewDto {
 	private String RVimgname;
 	private String RVimgpath;
 	private Long RVimgsize;
-	public int getRVnumber() {
+	public String getRVnumber() {
 		return RVnumber;
 	}
-	public void setRVnumber(int rVnumber) {
+	public void setRVnumber(String rVnumber) {
 		RVnumber = rVnumber;
 	}
-	public String getMid() {
-		return Mid;
+	public String getWriter() {
+		return Writer;
 	}
-	public void setMid(String mid) {
-		Mid = mid;
+	public void setWriter(String writer) {
+		Writer = writer;
 	}
-	public int getRTnumber() {
+	public String getRTnumber() {
 		return RTnumber;
 	}
-	public void setRTnumber(int rTnumber) {
+	public void setRTnumber(String rTnumber) {
 		RTnumber = rTnumber;
 	}
 	public String getRTname() {
@@ -84,10 +84,13 @@ public class ReviewDto {
 	}
 	@Override
 	public String toString() {
-		return "ReviewDto [RVnumber=" + RVnumber + ", Mid=" + Mid + ", RTnumber=" + RTnumber + ", RTname=" + RTname
-				+ ", RVtitle=" + RVtitle + ", RVcontent=" + RVcontent + ", RVcount=" + RVcount + ", RVdate=" + RVdate
-				+ ", RVimgname=" + RVimgname + ", RVimgpath=" + RVimgpath + ", RVimgsize=" + RVimgsize + "]";
+		return "ReviewDto [RVnumber=" + RVnumber + ", Writer=" + Writer + ", RTnumber=" + RTnumber + ", RTname="
+				+ RTname + ", RVtitle=" + RVtitle + ", RVcontent=" + RVcontent + ", RVcount=" + RVcount + ", RVdate="
+				+ RVdate + ", RVimgname=" + RVimgname + ", RVimgpath=" + RVimgpath + ", RVimgsize=" + RVimgsize + "]";
 	}
+	
+	
+	
 	
 	
 }

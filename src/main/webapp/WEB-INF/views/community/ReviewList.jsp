@@ -64,8 +64,8 @@
 									<img src="${reviewDto.RVimgpath}">
 								</a>
 								<div id="card_text">
-									<div id="card_text2">제목 : ${reviewDto.RVtitle}</div>
-									${RTname}
+									<div id="card_text2">제목:${reviewDto.RVtitle}</div>
+									식당명:${reviewDto.RTname}
 								</div>
 							</div>
 						</div>
