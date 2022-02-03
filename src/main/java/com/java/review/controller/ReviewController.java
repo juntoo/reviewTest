@@ -61,13 +61,33 @@ public class ReviewController {
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("request",request);
 		mav.addObject("reviewDto",reviewDto);
-		mav.addObject("imgDto", imgDto);
 		
 		reviewService.reviewWriteOk(mav);
 		
 		return mav;
 	}
 	
-	//@RequestMapping(value="/community/ReviewImgCheckOk.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/community/ReviewDelete", method = RequestMethod.GET)
+	public ModelAndView reviewDelete(HttpServletRequest request, HttpServletResponse response) {
+		int RVnumber=Integer.parseInt(request.getParameter("RVnumber"));
+		int pageNumber=Integer.parseInt(request.getParameter("pageNumber"));
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("RVnumber",RVnumber);
+		mav.addObject("pageNumber",pageNumber);
+		
+		mav.setViewName("community/ReviewDelete");
+		return mav;
+	}
+	
+	@RequestMapping(value = "/community/RestaurantSearch", method = RequestMethod.GET)
+	public ModelAndView restaurantSearch(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("request",request);
+		
+		reviewService.RTsearch(mav);
+		
+		return mav;
+	}
 	
 }

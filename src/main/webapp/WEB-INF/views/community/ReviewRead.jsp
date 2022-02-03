@@ -34,8 +34,9 @@
 			</div>
 			<div id="content">
 				<div id="mid1">
-					<span id="viewcount">조회수</span> <span id="mid1_button">${reviewDto.RVcount} <input
-						type="button" value="수정" />
+					<span id="viewcount">조회수 : ${reviewDto.RVcount}</span>  
+					<span id="mid1_button">
+						<input type="button" value="수정" />
 					</span>
 				</div>
 				<div id="mid2">
@@ -44,14 +45,14 @@
 					</div>
 					<div id="mid3">
 						<div>
-							${Mid} <input type="text" value="naninani" disabled="disabled"
+							${Mid} <input type="text" value="${Mid}" disabled="disabled"
 								style="width: 100px; text-align: center;" />
 						</div>
 					</div>
 					<div id="mid4">
 						<div id="mid_image">
-							<img alt="picon"
-								src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20150803_11%2Fopera2528_1438599289948ID68K_JPEG%2Fnaver_com_20150714_193055.jpg&type=sc960_832">
+							<img alt="${reviewDto.RVimgname}"
+								src="${root}/resources/img/${reviewDto.RVimgname}">
 						</div>
 					</div>
 					<div id="mid5">

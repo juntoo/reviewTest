@@ -9,13 +9,13 @@ public interface ReviewDao {
 	
 	public int getCount();
 	
+	public String getRTname();
+	
 	public List<ReviewDto> reviewList(int startRow, int endRow);
 	
 	public int reviewWriteOk(ReviewDto reviewDto);
 	
-	public int imgWriteOk(ImgDto imgDto);
+	public ReviewDto read(int RVnumber);
 	
-	public ReviewDto read(String RVnumber);
-	
-	public int reviewWriteNumber(ReviewDto reviewDto, ImgDto imgDto);
+	public int reviewWriteNumber(ReviewDto reviewDto);
 }

@@ -75,8 +75,8 @@ document.addEventListener('DOMContentLoaded', function(){
     });
 });
 
-function RTserch(root){
-	var url=root+"/community/RestaurantSerch.do";
+function RTsearch(root){
+	var url=root+"/community/RestaurantSearch.do";
 	//alert(url);
 	
 	window.open(url, "", "width=500, height=500");
@@ -113,11 +113,14 @@ function RTserch(root){
 						enctype="multipart/form-data">
 						
 						<input type="hidden" name="Mid" value="${Mid}"/>
+						<input type="hidden" name="RTname" value="${RTname}"/>
+						<input type="hidden" name="RTnumber" value="${RTnumber}"/>
 						
 					<div id="mid1">
 						<div id="searchBox">
-							<label>식당:<input type="text" id="search" onkeyup="filter()" name="RTnumber"/></label>
-							<input type="button" value="식당검색" onclick="RTserch('${root}')"/>
+							<label>식당고유번호:<input type="text" id="search" onkeyup="filter()" name="RTnumber"/></label>
+							<label>식당이름:<input type="text" id="search" onkeyup="filter()" name="RTname"/></label>
+							<input type="button" value="식당검색" onclick="RTsearch('${root}')"/>
 						</div>
 						<span id="mid1_button">
 							<input type="submit" value="확인" /> <input type="button" value="취소"  onclick="location.href='${root}/community/ReviewList.do';"/>
@@ -136,7 +139,7 @@ function RTserch(root){
 					</div>
 					<div id="mid3">
 						<div>
-							memberId <input type="text" value="${Mname}" disabled="disabled"
+							작성자 <input type="text" value="${Mname}" disabled="disabled"
 								style="width: 100px; text-align: center;" />
 						</div>
 					</div>
