@@ -161,9 +161,10 @@ public class ReviewServiceImp implements ReviewService {
 		String RVnumber=request.getParameter("RVnumber");
 		int pageNumber=Integer.parseInt(request.getParameter("pageNumber"));
 		String password=request.getParameter("password");
-		LogAspect.logger.info(LogAspect.LogMsg+RVnumber+","+pageNumber+","+password);
+		String Mid=request.getParameter("Mid");
+		LogAspect.logger.info(LogAspect.LogMsg+RVnumber+","+pageNumber+","+password+","+Mid);
 		
-		int passCheck=reviewDao.passCheck(password);
+		int passCheck=reviewDao.passCheck(password, Mid);
 		
 		if(passCheck > 0) {
 			check=reviewDao.reviewDeleteCheck(RVnumber);
@@ -177,11 +178,17 @@ public class ReviewServiceImp implements ReviewService {
 	}
 	
 	@Override
+	public void reviewUpdate(ModelAndView mav) {
+		
+		
+	}
+	
+	@Override
 	public void RTsearch(ModelAndView mav) {
 		Map<String, Object> map=mav.getModelMap();
 		HttpServletRequest request=(HttpServletRequest) map.get("request");
 		
-		List<RestaurnatDto> RTlist=reviewDao.RTsearch();
+//		List<RestaurnatDto> RTlist=reviewDao.RTsearch();
 		
 		
 		mav.addObject("request",request);

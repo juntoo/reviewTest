@@ -13,6 +13,7 @@
 		<form action="${root}/community/ReviewDeleteOk.do" method="post">
 			<input type="hidden" name="RVnumber"  value="${RVnumber}"/>
 			<input type="hidden" name="pageNumber"  value="${pageNumber}"/>
+			<input type="hidden" name="Mid" value="${Mid}">
 			
 			<table border="1">
 				<tr>

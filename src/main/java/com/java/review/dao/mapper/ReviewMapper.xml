@@ -49,8 +49,8 @@
   	SELECT * FROM review WHERE RVnumber=#{RVnumber}
   </select>
   
-  <select id="passCheck" parameterType="String" resultType="int">
-  	SELECT COUNT(*) FROM member WHERE Mpassword=#{password}
+  <select id="passCheck" parameterType="java.util.HashMap" resultType="int">
+  	SELECT COUNT(*) FROM member WHERE Mpassword=#{password} AND Mid=#{Mid}
   </select>
   
   <delete id="reviewDelete" parameterType="String">

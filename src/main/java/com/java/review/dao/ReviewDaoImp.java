@@ -57,8 +57,12 @@ public class ReviewDaoImp implements ReviewDao {
 	}
 	
 	@Override
-	public int passCheck(String password) {
-		int check=sqlSessionTemplate.selectOne("passCheck", password);
+	public int passCheck(String password, String Mid) {
+		HashMap<String, String> hMap=new HashMap<String, String>();
+		hMap.put("password", password);
+		hMap.put("Mid", Mid);
+		
+		int check=sqlSessionTemplate.selectOne("passCheck", hMap);
 		
 		return check;
 	}

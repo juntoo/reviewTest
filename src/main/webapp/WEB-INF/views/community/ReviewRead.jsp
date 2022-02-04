@@ -63,7 +63,7 @@
 					<div id="mid4">
 						<div id="mid_image">
 							<img alt="${reviewDto.RVimgname}"
-								src="${root}/resources/img/${reviewDto.RVimgname}">
+								src="${reviewDto.RVimgpath}">
 						</div>
 					</div>
 					<div id="mid5">
