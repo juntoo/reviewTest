@@ -56,5 +56,17 @@ public class ReviewDaoImp implements ReviewDao {
 		return check;
 	}
 	
-
+	@Override
+	public int passCheck(String password) {
+		int check=sqlSessionTemplate.selectOne("passCheck", password);
+		
+		return check;
+	}
+	
+	@Override
+	public int reviewDeleteCheck(String RVnumber) {
+		int check=sqlSessionTemplate.delete("reviewDelete", RVnumber);
+		
+		return check;
+	}
 }

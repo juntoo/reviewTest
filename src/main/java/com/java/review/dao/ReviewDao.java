@@ -16,4 +16,8 @@ public interface ReviewDao {
 	public ReviewDto read(String RVnumber);
 	
 	public int reviewWriteNumber(ReviewDto reviewDto);
+	
+	public int passCheck(String password);
+	
+	public int reviewDeleteCheck(String RVnumber);
 }

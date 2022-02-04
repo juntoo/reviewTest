@@ -77,6 +77,7 @@ public class ReviewServiceImp implements ReviewService {
 			RVnumber=request.getParameter("RVnumber");
 		}
 		
+				
 		mav.addObject("RVnumber", RVnumber);
 		
 		mav.setViewName("community/ReviewWrite");	
@@ -96,7 +97,7 @@ public class ReviewServiceImp implements ReviewService {
 			long fileSize=upFile.getSize();
 			LogAspect.logger.info(LogAspect.LogMsg + fileName + ","  + fileSize);
 			
-			File path=new File("F:\\pds\\");
+			File path=new File("C:\\pds\\");
 			path.mkdir();
 			LogAspect.logger.info(LogAspect.LogMsg + path);
 			LogAspect.logger.info(LogAspect.LogMsg + fileName);
@@ -156,8 +157,23 @@ public class ReviewServiceImp implements ReviewService {
 		Map<String, Object> map=mav.getModelMap();
 		HttpServletRequest request=(HttpServletRequest) map.get("request");
 		
-		int RVnumber=Integer.parseInt(request.getParameter("RVnumber"));
+		int check=0;
+		String RVnumber=request.getParameter("RVnumber");
 		int pageNumber=Integer.parseInt(request.getParameter("pageNumber"));
+		String password=request.getParameter("password");
+		LogAspect.logger.info(LogAspect.LogMsg+RVnumber+","+pageNumber+","+password);
+		
+		int passCheck=reviewDao.passCheck(password);
+		
+		if(passCheck > 0) {
+			check=reviewDao.reviewDeleteCheck(RVnumber);
+			LogAspect.logger.info(LogAspect.LogMsg+"check="+check);
+		}
+		
+		mav.addObject("check", check);
+		mav.addObject("pageNumber", pageNumber);
+		mav.setViewName("community/ReviewDeleteOk");
+		
 	}
 	
 	@Override

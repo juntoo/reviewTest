@@ -56,7 +56,7 @@ public class ReviewController {
 	}
 	
 	@RequestMapping(value="/community/ReviewWriteOk.do", method = RequestMethod.POST)
-	public ModelAndView reviewWriteOk(HttpServletRequest request,HttpServletResponse response, ReviewDto reviewDto, ImgDto imgDto) {
+	public ModelAndView reviewWriteOk(HttpServletRequest request,HttpServletResponse response, ReviewDto reviewDto) {
 		
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("request",request);
@@ -69,7 +69,7 @@ public class ReviewController {
 	
 	@RequestMapping(value = "/community/ReviewDelete", method = RequestMethod.GET)
 	public ModelAndView reviewDelete(HttpServletRequest request, HttpServletResponse response) {
-		int RVnumber=Integer.parseInt(request.getParameter("RVnumber"));
+		String RVnumber=request.getParameter("RVnumber");
 		int pageNumber=Integer.parseInt(request.getParameter("pageNumber"));
 		
 		ModelAndView mav=new ModelAndView();
@@ -77,6 +77,15 @@ public class ReviewController {
 		mav.addObject("pageNumber",pageNumber);
 		
 		mav.setViewName("community/ReviewDelete");
+		return mav;
+	}
+	
+	@RequestMapping(value = "/community/ReviewDeleteOk", method = RequestMethod.POST)
+	public ModelAndView reviewDeleteOk(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("request", request);
+		
+		reviewService.reviewDeleteOk(mav);
 		return mav;
 	}
 	

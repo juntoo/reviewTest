@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<% pageContext.setAttribute("replaceChar", "\n"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +10,13 @@
 <title>Insert title here</title>
 <c:set var="root" value="${pageContext.request.contextPath}" />
 <link rel="stylesheet" href="${root}/resources/css/community/ReviewStyle.css" />
+<script type="text/javascript">
+	function delFun(root, RVnumber, pageNumber){
+		var url=root + "/community/ReviewDelete.do?RVnumber=" + RVnumber + "&pageNumber=" + pageNumber;
+		
+		location.href=url;
+	}
+</script>
 </head>
 <body>
 	<div>
@@ -38,7 +47,7 @@
 					<span id="mid1_button">
 						<c:if test="${Mid == reviewDto.writer || Mid == 'admin'}">
 							<input type="button" value="수정" />
-							<input type="button" value="삭제" />
+							<input type="button" value="삭제" onclick="delFun('${root}', '${reviewDto.RVnumber}', '${pageNumber}')"/>
 						</c:if>
 					</span>
 				</div>
@@ -62,7 +71,7 @@
 					</div>
 					<div id="mid6">
 						<div style="word-break:break-all; overflow: auto; width: 80%; height: 206px;">
-							${reviewDto.RVcontent}
+							${fn:replace(reviewDto.RVcontent, replaceChar, "<br/>")}
 						</div>
 						<div>
 							<a href="${root}/community/ReviewList.do"><input
