@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import com.java.aop.LogAspect;
 import com.java.img.dto.ImgDto;
+import com.java.restaurant.dto.RestaurnatDto;
 import com.java.review.dto.ReviewDto;
 
 @Component
@@ -72,5 +73,23 @@ public class ReviewDaoImp implements ReviewDao {
 		int check=sqlSessionTemplate.delete("reviewDelete", RVnumber);
 		
 		return check;
+	}
+	
+	@Override
+	public ReviewDto reviewUpdateSelect(String RVnumber) {
+		
+		return sqlSessionTemplate.selectOne("reviewRead",RVnumber);
+	}
+	
+	@Override
+	public int reviewUpdateOk(ReviewDto reviewDto) {
+		
+		return sqlSessionTemplate.update("reviewUpdate", reviewDto);
+	}
+	
+	@Override
+	public List<RestaurnatDto> RTsearch(String RTname) {
+		
+		return sqlSessionTemplate.selectList("RTsearch",RTname);
 	}
 }

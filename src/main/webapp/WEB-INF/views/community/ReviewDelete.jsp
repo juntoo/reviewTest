@@ -14,6 +14,7 @@
 			<input type="hidden" name="RVnumber"  value="${RVnumber}"/>
 			<input type="hidden" name="pageNumber"  value="${pageNumber}"/>
 			<input type="hidden" name="Mid" value="${Mid}">
+			<input type="hidden" name="imgPath" value="${reviewDto.RVimgpath}">
 			
 			<table border="1">
 				<tr>

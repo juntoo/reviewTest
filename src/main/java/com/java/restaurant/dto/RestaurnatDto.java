@@ -3,7 +3,7 @@ package com.java.restaurant.dto;
 
 public class RestaurnatDto {
 	
-	private int RTnumber;
+	private String RTnumber;
 	
 	private String RTname;
 	private	String RTtype;
@@ -21,10 +21,11 @@ public class RestaurnatDto {
 	private int group_Number;			// 그룹번호
 	private int sequence_Number;		// 글순서
 	private int sequence_Level;
-	public int getRTnumber() {
+	
+	public String getRTnumber() {
 		return RTnumber;
 	}
-	public void setRTnumber(int rTnumber) {
+	public void setRTnumber(String rTnumber) {
 		RTnumber = rTnumber;
 	}
 	public String getRTname() {

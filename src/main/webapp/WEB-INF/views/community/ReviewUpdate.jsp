@@ -109,7 +109,7 @@ function RTsearch(root){
 			</div>
 			<div id="content">
 				<form name="reviewForm"
-						action="${root}/community/ReviewWriteOk.do?root=${root}"
+						action="${root}/community/ReviewUpdateOk.do?root=${root}"
 						method="post"
 						enctype="multipart/form-data">
 						
@@ -121,12 +121,13 @@ function RTsearch(root){
 						
 					<div id="mid1">
 						<div id="searchBox">
-							<label>식당고유번호<input type="text" id="search" disabled="disabled" name="RTnumber"/></label>
-							<label>식당이름<input type="text" id="search" disabled="disabled" name="RTname"/></label>
-							<input type="button" value="식당검색" onclick="RTsearch('${root}')"/>
+							<label>식당고유번호<input type="text" id="search" value="${reviewDto.RTnumber}" disabled="disabled" name="RTnumber"/></label>
+							<label>식당이름<input type="text" id="search" value="${reviewDto.RTname}" disabled="disabled" name="RTname"/></label>
 						</div>
 						<span id="mid1_button">
-							<input type="submit" value="확인" /> <input type="button" value="취소"  onclick="location.href='${root}/community/ReviewList.do';"/>
+							<input type="submit" value="확인" />
+							<input type="reset" value="다시작성"/> 
+							<input type="button" value="취소"  onclick="location.href='${root}/community/ReviewList.do';"/>
 						</span>
 					</div>
 					<div id="mid2">
@@ -136,7 +137,7 @@ function RTsearch(root){
 						<div
 							style="height: 60px; line-height: 60px; margin-left: 20px; display: inline-block; top: 0;">
 							<span style="vertical-align: middle;"><input type="text"
-								name="RVtitle"
+								name="RVtitle" value="${reviewDto.RVtitle}"
 								style="width: 500px; height: 30px; font-size: 24px;" /></span>
 						</div>
 					</div>
@@ -148,17 +149,18 @@ function RTsearch(root){
 					</div>
 					<div id="mid4">
 						<div id="mid_image">
-							<img class="thumb" src="">
+							<img class="thumb" src="${root}/resources/img/${reviewDto.RVimgname}">
 						</div>
 					</div>
 					<div id="mid5">
 						<span>
-							<input type="file" name="file" id="imageSelector" accept="image/*" onchange="setThumbnail(event);"/>
+<!-- 							<input type="file" name="file" id="imageSelector" accept="image/*" onchange="setThumbnail(event);"/> -->
+<%-- 							${reviewDto.RVimgname} --%>
 						</span>
 					</div>
 					<div id="mid6">
 						<div>
-							<textarea rows="10" cols="120" style="font-size: 17px;" name="RVcontent" ></textarea>
+							<textarea rows="10" cols="120" style="font-size: 17px;" name="RVcontent" >${reviewDto.RVcontent}</textarea>
 						</div>
 					</div>
 				</form>
